@@ -1,0 +1,10 @@
+module interfaces_pkg {
+    module msg {
+        module dds_ {
+            @final
+            struct SteeringStatus_ {
+                long steering;
+            };
+        };
+    };
+};

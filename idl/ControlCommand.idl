@@ -1,0 +1,12 @@
+module interfaces_pkg {
+    module msg {
+        module dds_ {
+            @final
+            struct MotionCommand_ {
+                long steering;
+                long left_speed;
+                long right_speed;
+            };
+        };
+    };
+};
