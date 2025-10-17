@@ -1,6 +1,7 @@
 #include "camera_module/camera_server.hpp"
 #include "control_module/control_subscriber.hpp"
 #include "status_module/status_publisher.hpp"
+#include "update_module/update_subscriber.hpp"
 #include <signal.h>
 #include <iostream>
 #include <atomic>
@@ -25,6 +26,7 @@ int main(int argc, char** argv) {
         CameraServer camera_server(8485);
         ControlSubscriber control_subscriber;
         StatusPublisher status_publisher;
+        UpdateSubscriber update_subscriber;
 
         // Start all modules
         if (!camera_server.start()) {
@@ -45,6 +47,14 @@ int main(int argc, char** argv) {
             return 1;
         }
 
+        if (!update_subscriber.start()) {
+            std::cerr << "Failed to start update subscriber" << std::endl;
+            status_publisher.stop();
+            control_subscriber.stop();
+            camera_server.stop();
+            return 1;
+        }
+
         std::cout << "All modules started successfully." << std::endl;
 
         // Main loop
@@ -55,6 +65,7 @@ int main(int argc, char** argv) {
         // Clean shutdown
         std::cout << "Shutting down..." << std::endl;
         
+        update_subscriber.stop();
         status_publisher.sendShutdownMessages();
         status_publisher.stop();
         control_subscriber.sendShutdownMessages();

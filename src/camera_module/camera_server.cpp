@@ -61,16 +61,23 @@ void CameraServer::setupDDS() {
     }
 
     topic_ = participant_->create_topic(
-        "rt/image_02_raw",
+        "rt/image_04_raw",
         type_.get_type_name(),
         TOPIC_QOS_DEFAULT);
     if (topic_ == nullptr) {
         throw std::runtime_error("Create topic failed");
     }
+    // 1. DataWriterQoS 객체 생성
+    DataWriterQos wqos;
+    publisher_->get_default_datawriter_qos(wqos);
 
+    // 2. Reliability 정책을 BEST_EFFORT로 변경
+    wqos.reliability().kind = BEST_EFFORT_RELIABILITY_QOS;
+
+    // 3. 수정된 QoS(wqos)를 사용하여 DataWriter 생성
     writer_ = publisher_->create_datawriter(
         topic_,
-        DATAWRITER_QOS_DEFAULT,
+        wqos,
         new ImageListener());
     if (writer_ == nullptr) {
         throw std::runtime_error("Create datawriter failed");

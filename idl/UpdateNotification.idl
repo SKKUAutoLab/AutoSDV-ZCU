@@ -1,0 +1,13 @@
+module ota_update_interfaces {
+    module msg {
+        module dds_ {
+            @final
+            struct UpdateNotification_ {
+                string target;
+                string version;
+                string file_path;
+                unsigned long long file_size;
+            };
+        };
+    };
+};

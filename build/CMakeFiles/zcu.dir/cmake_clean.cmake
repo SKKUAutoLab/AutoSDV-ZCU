@@ -21,6 +21,12 @@ file(REMOVE_RECURSE
   "CMakeFiles/zcu.dir/src/status_module/StatusPubSubTypes.cxx.o.d"
   "CMakeFiles/zcu.dir/src/status_module/status_publisher.cpp.o"
   "CMakeFiles/zcu.dir/src/status_module/status_publisher.cpp.o.d"
+  "CMakeFiles/zcu.dir/src/update_module/UpdateNotification.cxx.o"
+  "CMakeFiles/zcu.dir/src/update_module/UpdateNotification.cxx.o.d"
+  "CMakeFiles/zcu.dir/src/update_module/UpdateNotificationPubSubTypes.cxx.o"
+  "CMakeFiles/zcu.dir/src/update_module/UpdateNotificationPubSubTypes.cxx.o.d"
+  "CMakeFiles/zcu.dir/src/update_module/update_subscriber.cpp.o"
+  "CMakeFiles/zcu.dir/src/update_module/update_subscriber.cpp.o.d"
   "zcu"
   "zcu.pdb"
 )
